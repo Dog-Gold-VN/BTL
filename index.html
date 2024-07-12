@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Trang Chủ</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 1px solid #666;
+            padding-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .taikhoan {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            margin-left: 15%;
+            margin-right: 15%;
+            min-height: 750px;
+            border-radius: 10px;
+        }
+
+        .text {
+            font-size: 20px;
+        }
+
+        .select {
+            display: none;
+            position: absolute;
+            background-color: #49494d;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .taikhoan:hover .select {
+            display: block;
+        }
+
+        .select a {
+            font-size: 20px;
+            display: block;
+            padding: 5px 10px;
+            color: white;
+        }
+
+        .select a:hover {
+            background-color: #666;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+        }
+
+        #list-sanpham {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .sanphamDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #333;
+            border: 1px solid white;
+            justify-content: space-between;
+        }
+
+        .sanphamDiv a {
+            color: white;
+            text-align: center;
+            margin-bottom: auto;
+        }
+
+        .sanphamDiv img {
+            max-width: 250px;
+            /* height: 300px; */
+            border-radius: 5px;
+        }
+
+        #addGioHang {
+            background-color: rgb(66, 212, 74);
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        #addGioHang:hover {
+            background-color: rgb(56, 248, 56);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                margin: 0px 20px;
+                gap: 20px;
+            }
+
+            nav a {
+                font-size: 17px;
+            }
+
+            .taikhoan {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .taikhoan div {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://media.istockphoto.com/id/1256108875/vi/vec-to/m%E1%BA%ABu-thi%E1%BA%BFt-k%E1%BA%BF-logo-shiba-inu-c%E1%BB%A7a-ch%C3%BA-ch%C3%B3-nh%E1%BA%ADt-b%E1%BA%A3n.jpg?s=612x612&w=0&k=20&c=Uy3_00iHTzUNVwNp4W2wzxkKJ2a1lJrNlvTXQkXezeQ="
+                alt="logo">
+            <h1>Shiba Shop</h1>
+        </div>
+        <nav>
+            <a href="" id="trangchu">Trang Chủ</a>
+            <a href="" id="trangquantri"> Đăng bán </a>
+            <a href="" id="giohang">Giỏ Hàng</a>
+            <a href="">Liên Hệ</a>
+            <div class="taikhoan">
+                <div class="text">
+                    Tài Khoản
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="select">
+                    <a href="register.html">Đăng Ký</a>
+                    <a href="login.html">Đăng Nhập</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="list-sanpham">
+
+        </div>
+    </main>
+    <footer>
+        <p>&copy; Shiba Shop</p>
+    </footer>
+    <script>
+
+        async function hienthi() {
+            const apiUrl = "http://localhost:3000/listSanPham";
+            const listSanPhamDiv = document.getElementById("list-sanpham");
+
+            try {
+                const response = await fetch(apiUrl);
+                if (response.ok) {
+
+                    const data = await response.json();
+                    console.log(data);
+
+                    console.log("Độ dài của listSanPham:", data.length);
+
+                    let slSanPhams = 0;
+                    data.forEach((item, index) => {
+                        console.log(`Độ dài của SanPhams trong phần tử ${index + 1}:`, item.SanPhams.length);
+                        slSanPhams++;
+                        let lis = item.SanPhams;
+                        lis.forEach((ttsanpham) => {
+                            console.log(ttsanpham.name);
+
+                            const sanphamDiv = document.createElement("div");
+
+                            sanphamDiv.classList.add("sanphamDiv");
+
+                            sanphamDiv.innerHTML = `
+                            <a href="TrangChiTiet.html?id=${ttsanpham.id}">
+                                <h3>${ttsanpham.name}</h3>
+                                <p><strong>Giá:</strong> ${ttsanpham.gia.toLocaleString('vi-VN')} VND</p>
+                                <img src="${ttsanpham.img}" alt="${ttsanpham.name}">
+                            </a>
+                                <button id="addGioHang" onclick="themVaoGioHang('${ttsanpham.idSP}')">Thêm vào giỏ hàng</button>
+                            `;
+                            listSanPhamDiv.appendChild(sanphamDiv);
+                        })
+                    });
+
+                } else {
+                    console.error("Có lỗi xảy ra khi lấy dữ liệu từ API!");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        async function themVaoGioHang(idSP) {
+            const apiUrl = "http://localhost:3000/listSanPham";
+            const id = getQueryParam('id');
+            console.log(idSP);
+
+            const sanphamMoi = {
+                idSP
+            };
+            try {
+                const response = await fetch(`${apiUrl}?id=${id}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const user = data.find(item => item.id === id);
+
+                    if (!user) {
+                        console.error("Không tìm thấy người dùng!");
+                        return;
+                    }
+
+                    const sanphamsHienCo = user.idGioHang || [];
+
+                    sanphamsHienCo.push(sanphamMoi);
+
+                    const updatedUser = { ...user, idGioHang: sanphamsHienCo };
+
+                    const updateResponse = await fetch(`${apiUrl}/${id}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(updatedUser),
+                    });
+
+                    if (updateResponse.ok) {
+                        console.log("Thêm vào giỏ hàng thành công!");
+                    } else {
+                        console.error("Có lỗi xảy ra khi cập nhật giỏ hàng!");
+                    }
+                } else {
+                    console.error("Không thể lấy thông tin người dùng từ API!");
+                }
+            } catch (error) {
+                console.error("Lỗi:", error);
+            }
+        }
+
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+
+        async function hienThiTaiKhoan() {
+            const id = getQueryParam('id');
+            console.log(typeof (id), id);
+            if (id) {
+                try {
+                    const response = await fetch(`http://localhost:3000/listSanPham?id=${id}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log("data: ", typeof (data), data);
+
+                        if (data.length > 0) {
+                            const user = data[0];
+                            console.log("user: ", user);
+
+                            const taikhoanDiv = document.querySelector('.taikhoan');
+                            taikhoanDiv.innerHTML = `
+                        <div class="text">
+                            ${user.nameUser}
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="select">
+                            <a href="index.html">Đăng Xuất</a>
+                        </div>
+                    `;
+                            console.log("Lấy thông tin thành công");
+                            console.log("username: ", user.nameUser);
+                            console.log("id:", id);
+                        } else {
+                            console.error("Không tìm thấy người dùng với ID này!");
+                        }
+                    } else {
+                        console.error("Không thể lấy thông tin người dùng!");
+                    }
+                } catch (error) {
+                    console.error("Lỗi:", error);
+                }
+            }
+        }
+
+        function trangquantri() {
+            const trangquantriLink = document.getElementById("trangquantri");
+            trangquantriLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                const id = getQueryParam('id');
+                window.location.href = `TrangQuanTri.html?id=${id}`;
+            });
+        }
+
+        function gioHang() {
+            const trangquantriLink = document.getElementById("giohang");
+            trangquantriLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                const id = getQueryParam('id');
+                window.location.href = `GioHang.html?id=${id}`;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            hienthi();
+            hienThiTaiKhoan();
+            gioHang();
+            trangquantri();
+        });
+
+    </script>
+</body>
+
+</html>

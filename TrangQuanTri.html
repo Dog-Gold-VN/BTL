@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Trang Quản Trị</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
+            font-size: 20px;
+        }
+
+
+        main {
+            border-radius: 10px;
+            margin-left: 15%;
+            width: 70%;
+            min-height: 700px;
+            background-color: #49494d;
+            padding: 20px;
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #1e1e1e;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+
+        form div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        button,
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            background-color: #555;
+            color: white;
+        }
+
+        button {
+            background-color: #ff6600;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff4500;
+        }
+
+        .select {
+            display: none;
+            position: absolute;
+            background-color: #49494d;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .taikhoan:hover .select {
+            display: block;
+        }
+
+        .select a {
+            font-size: 20px;
+            display: block;
+            padding: 5px 10px;
+            color: white;
+        }
+
+        .select a:hover {
+            background-color: #666;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #button-an {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: #ff0000;
+        }
+
+        .size-input {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .size-input div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .size-input input {
+            width: 60px;
+        }
+
+        #list-sanpham {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .sanpham-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .sanpham-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .sanpham-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .sanpham-card img {
+            max-width: 200px;
+            border-radius: 3px;
+        }
+
+        .sanpham-btn {
+            background-color: #ff6347;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .sanpham-btn:hover {
+            background-color: #ff4500;
+        }
+
+
+        #list-sanpham {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://media.istockphoto.com/id/1256108875/vi/vec-to/m%E1%BA%ABu-thi%E1%BA%BFt-k%E1%BA%BF-logo-shiba-inu-c%E1%BB%A7a-ch%C3%BA-ch%C3%B3-nh%E1%BA%ADt-b%E1%BA%A3n.jpg?s=612x612&w=0&k=20&c=Uy3_00iHTzUNVwNp4W2wzxkKJ2a1lJrNlvTXQkXezeQ="
+                alt="logo">
+            <h1>Shiba Shop</h1>
+        </div>
+        <nav>
+            <a id="trangchu" href="">Trang Chủ</a>
+            <a href="">Đăng bán</a>
+            <a href="">Giỏ Hàng</a>
+            <a href="">Liên Hệ</a>
+            <div class="taikhoan">
+                <div class="text">
+                    Tài Khoản
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="select">
+                    <a href="register.html">Đăng Ký</a>
+                    <a href="login.html">Đăng Nhập</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <button id="button-an">Ẩn</button>
+            <section id="section">
+                <h1>Đăng Bán Sản Phẩm</h1>
+                <form action="" id="form">
+                    <div>
+                        <label for="name">Tên sản phẩm</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div>
+                        <label for="brand">Thương hiệu</label>
+                        <input type="text" id="thuonghieu" required>
+                    </div>
+                    <div>
+                        <label for="category">Loại sản phẩm</label>
+                        <input type="text" id="loaisanpham" required>
+                    </div>
+                    <div>
+                        <label for="gia">Giá</label>
+                        <input type="number" id="gia" required>
+                    </div>
+                    <div>
+                        <label for="mota">Mô tả</label>
+                        <textarea id="mota" placeholder=""></textarea>
+                    </div>
+                    <div>
+                        <label for="imgurl">Hình ảnh</label>
+                        <input type="text" id="imgurl" placeholder="URL hình ảnh" required>
+                    </div>
+                    <div>
+                        <label>Kích cỡ và Số lượng</label>
+                        <div class="size-input">
+                            <div>
+                                <label for="sizeS">Size S</label>
+                                <input type="number" id="sizeS" min="0" required>
+                            </div>
+                            <div>
+                                <label for="sizeM">Size M</label>
+                                <input type="number" id="sizeM" min="0" required>
+                            </div>
+                            <div>
+                                <label for="sizeL">Size L</label>
+                                <input type="number" id="sizeL" min="0" required>
+                            </div>
+                            <div>
+                                <label for="sizeXL">Size XL</label>
+                                <input type="number" id="sizeXL" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="color">Màu sắc</label>
+                        <input type="text" id="color" placeholder="VD: Đen, Trắng, Xanh..." required>
+                    </div>
+                    <div>
+                        <label for="material">Chất liệu</label>
+                        <input type="text" id="chatlieu" placeholder="VD: Cotton, Lụa, Jean..." required>
+                    </div>
+                    <button onclick="dangbanButton()" style="margin-top: 50px;" id="submit" type="submit"> Xác nhận </button>
+                </form>
+            </section>
+        </div>
+        <div id="list-sanpham"></div>
+    </main>
+    <footer>
+        <p>&copy; Shiba Shop</p>
+    </footer>
+    <script src="TrangQuanTri.js"></script>
+</body>
+
+</html>

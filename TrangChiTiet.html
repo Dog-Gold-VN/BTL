@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Trang Chi Tiết</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .taikhoan {
+            position: relative;
+        }
+
+        .select {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: #49494d;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .taikhoan:hover .select {
+            display: block;
+        }
+
+        .select a {
+            font-size: 16px;
+            display: block;
+            padding: 5px 10px;
+            color: white;
+        }
+
+        .select a:hover {
+            background-color: #666;
+        }
+
+        main {
+            margin: 20px auto;
+            width: 80%;
+            background-color: #49494d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .sanpham {
+            width: 100%;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sanpham h2 {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .sanpham p {
+            margin: 5px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .sanpham img {
+            width: 80%;
+            max-width: 300px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .sanpham-buttons {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .sanpham button {
+            padding: 8px 15px;
+            font-size: 16px;
+            background-color: #666;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .sanpham button:hover {
+            background-color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://media.istockphoto.com/id/1256108875/vi/vec-to/m%E1%BA%ABu-thi%E1%BA%BFt-k%E1%BA%BF-logo-shiba-inu-c%E1%BB%A7a-ch%C3%BA-ch%C3%B3-nh%E1%BA%ADt-b%E1%BA%A3n.jpg?s=612x612&w=0&k=20&c=Uy3_00iHTzUNVwNp4W2wzxkKJ2a1lJrNlvTXQkXezeQ="
+                alt="logo">
+            <h1>Shiba Shop</h1>
+        </div>
+        <nav>
+            <a href="index.html">Trang Chủ</a>
+            <a href="TrangQuanTri.html">Đăng bán sản phẩm</a>
+            <a href="GioHang.html">Giỏ Hàng</a>
+            <a href="#">Liên Hệ</a>
+            <div class="taikhoan">
+                <div class="text">
+                    Tài Khoản
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="select">
+                    <a href="">Đăng Ký</a>
+                    <a href="">Đăng Nhập</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="sanpham" id="gioHang">
+        </div>
+    </main>
+    <footer>
+        <p>&copy; Shiba Shop</p>
+    </footer>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        document.addEventListener("DOMContentLoaded", function () {
+            const apiUrl = `http://localhost:3000/listSanPham/${id}`;
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data from API:', data);
+
+                    const sanpham = {
+                        id: data.id,
+                        name: data.name,
+                        gia: data.gia,
+                        mota: data.mota,
+                        img: data.img,
+                        thuonghieu: data.thuonghieu,
+                        loaisanpham: data.loaisanpham,
+                        sizeS: data.sizeS,
+                        sizeM: data.sizeM,
+                        sizeL: data.sizeL,
+                        sizeXL: data.sizeXL,
+                        color: data.color,
+                        chatlieu: data.chatlieu
+                    };
+
+                    const sanphamDiv = document.getElementById('gioHang');
+
+                    sanphamDiv.innerHTML = `
+                        <h2 class="sanpham-name">${sanpham.name}</h2>
+                        <p><strong>Số lượng:</strong> ${sanpham.sizeL + sanpham.sizeM + sanpham.sizeS + sanpham.sizeXL
+                        }</p>
+                        <p><strong>Giá:</strong> ${sanpham.gia.toLocaleString('vi-VN')} VND</p>
+                        <p><strong>Mô tả:</strong> ${sanpham.mota}</p>
+                        <p><strong>Thương hiệu:</strong> ${sanpham.thuonghieu}</p>
+                        <p><strong>Loại sản phẩm:</strong> ${sanpham.loaisanpham}</p>
+                        <p><strong>Màu sắc:</strong> ${sanpham.color}</p>
+                        <p><strong>Chất liệu:</strong> ${sanpham.chatlieu}</p>
+                        <p><strong>Kích cỡ:</strong> S - ${sanpham.sizeS}, M - ${sanpham.sizeM
+                        }, L - ${sanpham.sizeL}, XL - ${sanpham.sizeXL}</p>
+                        <img src="${sanpham.img}" alt="${sanpham.name}" class="sanpham-img">
+                         <button id="addGioHang" onclick="themVaoGioHang('${sanpham.id}')">Thêm vào giỏ hàng</button>
+                    `;
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        });
+        async function themVaoGioHang(sanphamId) {
+            const apiUrl = `http://localhost:3000/listSanPham/${sanphamId}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ gioHang: true }),
+                });
+
+                if (response.ok) {
+                    console.log(`Sản phẩm có id ${sanphamId} đã được thêm vào giỏ hàng.`);
+                    alert("Đã thêm sản phẩm vào giỏ hàng");
+                } else {
+                    console.error('Có lỗi xảy ra khi thêm vào giỏ hàng.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>

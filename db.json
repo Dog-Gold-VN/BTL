@@ -1,0 +1,153 @@
+{
+  "listSanPham": [
+    {
+      "SanPhams": [
+        {
+          "idSP": "8218871",
+          "name": "A1",
+          "thuonghieu": "Eo vì",
+          "loaisanpham": "áo thun ngắn",
+          "gia": 200000,
+          "mota": "",
+          "img": "https://myo.vn/wp-content/uploads/2023/11/e55148776aee3bcdc93f89b6f47217ee.jpg",
+          "sizeS": 2,
+          "sizeM": 3,
+          "sizeL": 12,
+          "sizeXL": 3,
+          "color": "Trắng",
+          "chatlieu": "Lụa"
+        },
+        {
+          "idSP": "3875179",
+          "name": "A2",
+          "thuonghieu": "Eo vì",
+          "loaisanpham": "áo thun ngắn",
+          "gia": 200000,
+          "mota": "",
+          "img": "https://myo.vn/wp-content/uploads/2023/11/e55148776aee3bcdc93f89b6f47217ee.jpg",
+          "sizeS": 2,
+          "sizeM": 3,
+          "sizeL": 12,
+          "sizeXL": 3,
+          "color": "Trắng",
+          "chatlieu": "Lụa"
+        },
+        {
+          "idSP": "7411301",
+          "name": "A3",
+          "thuonghieu": "Eo vì",
+          "loaisanpham": "áo thun ngắn",
+          "gia": 200000,
+          "mota": "",
+          "img": "https://myo.vn/wp-content/uploads/2023/11/e55148776aee3bcdc93f89b6f47217ee.jpg",
+          "sizeS": 2,
+          "sizeM": 3,
+          "sizeL": 12,
+          "sizeXL": 0,
+          "color": "Trắng",
+          "chatlieu": "Lụa"
+        },
+        {
+          "idSP": "1509850",
+          "name": "A4",
+          "thuonghieu": "Eo vì",
+          "loaisanpham": "áo thun ngắn",
+          "gia": 200000,
+          "mota": "",
+          "img": "https://myo.vn/wp-content/uploads/2023/11/e55148776aee3bcdc93f89b6f47217ee.jpg",
+          "sizeS": 2,
+          "sizeM": 3,
+          "sizeL": 12,
+          "sizeXL": 3,
+          "color": "Trắng",
+          "chatlieu": "Lụa"
+        }
+      ],
+      "id": "3c1d",
+      "nameUser": "Quang Hai",
+      "emailUser": "quanghaia2005@gmail.com",
+      "passwordUser": "123",
+      "idGioHang": [
+        {
+          "idSP": "3875179"
+        },
+        {
+          "idSP": "3875179"
+        },
+        {
+          "idSP": "7411301"
+        }
+      ]
+    },
+    {
+      "SanPhams": [
+        {
+          "idSP": "2513565",
+          "name": "B1",
+          "thuonghieu": "Eo vì",
+          "loaisanpham": "áo thun ngắn",
+          "gia": 200000,
+          "mota": "",
+          "img": "https://myo.vn/wp-content/uploads/2023/11/e55148776aee3bcdc93f89b6f47217ee.jpg",
+          "sizeS": 2,
+          "sizeM": 3,
+          "sizeL": 12,
+          "sizeXL": 3,
+          "color": "Trắng",
+          "chatlieu": "Lụa"
+        }
+      ],
+      "id": "04f3",
+      "nameUser": "kz",
+      "emailUser": "kz88n92@gmail.com",
+      "passwordUser": "123",
+      "idGioHang": [
+        {
+          "idSP": "8218871"
+        },
+        {
+          "idSP": "7411301"
+        }
+      ]
+    },
+    {
+      "id": "49919237",
+      "SanPham": [],
+      "nameUser": "_Wang_Hai_",
+      "emailUser": "kz88n93@gmail.com",
+      "passwordUser": "123",
+      "SanPhams": [
+        {
+          "idSP": "7707585",
+          "name": "C1",
+          "thuonghieu": "Eo vì",
+          "loaisanpham": "áo thun ngắn",
+          "gia": 200000,
+          "mota": "",
+          "img": "https://myo.vn/wp-content/uploads/2023/11/e55148776aee3bcdc93f89b6f47217ee.jpg",
+          "sizeS": 2,
+          "sizeM": 3,
+          "sizeL": 12,
+          "sizeXL": 3,
+          "color": "Trắng",
+          "chatlieu": "Lụa"
+        },
+        {
+          "idSP": "530058",
+          "name": "C2",
+          "thuonghieu": "Eo vì",
+          "loaisanpham": "áo thun ngắn",
+          "gia": 200000,
+          "mota": "",
+          "img": "https://myo.vn/wp-content/uploads/2023/11/e55148776aee3bcdc93f89b6f47217ee.jpg",
+          "sizeS": 2,
+          "sizeM": 3,
+          "sizeL": 12,
+          "sizeXL": 3,
+          "color": "Trắng",
+          "chatlieu": "Lụa"
+        }
+      ]
+    }
+  ]
+}

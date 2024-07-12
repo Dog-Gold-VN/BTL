@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Giỏ Hàng</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
+        }
+
+        main {
+            border-radius: 10px;
+            margin-left: 5%;
+            margin-right: 5%;
+            width: 90%;
+            min-height: 100px;
+            background-color: #49494d;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .text {
+            font-size: 20px;
+        }
+
+        .select {
+            display: none;
+            position: absolute;
+            background-color: #49494d;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .taikhoan:hover .select {
+            display: block;
+        }
+
+        .select a {
+            font-size: 20px;
+            display: block;
+            padding: 5px 10px;
+            color: white;
+        }
+
+        .select a:hover {
+            background-color: #666;
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .sanpham-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .sanpham {
+            width: 300px;
+            border: 1px solid white;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sanpham h2 {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .sanpham p {
+            margin: 5px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .sanpham img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .sanpham button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 16px;
+            background-color: #666;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .sanpham button:hover {
+            background-color: #555;
+        }
+
+        .thanhtoan {
+            margin-top: 20px;
+        }
+
+        .thanhtoan button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #666;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .thanhtoan button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://media.istockphoto.com/id/1256108875/vi/vec-to/m%E1%BA%ABu-thi%E1%BA%BFt-k%E1%BA%BF-logo-shiba-inu-c%E1%BB%A7a-ch%C3%BA-ch%C3%B3-nh%E1%BA%ADt-b%E1%BA%A3n.jpg?s=612x612&w=0&k=20&c=Uy3_00iHTzUNVwNp4W2wzxkKJ2a1lJrNlvTXQkXezeQ="
+                alt="logo">
+            <h1>Shiba Shop</h1>
+        </div>
+        <nav>
+            <a href="" id="trangchu">Trang Chủ</a>
+            <a href="" id="trangquantri"> Đăng bán </a>
+            <a href="" id="giohang">Giỏ Hàng</a>
+            <a href="">Liên Hệ</a>
+            <div class="taikhoan">
+                <div class="text">
+                    Tài Khoản
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="select">
+                    <a href="">Đăng Ký</a>
+                    <a href="">Đăng Nhập</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="sanpham-list">
+        </div>
+        <div class="thanhtoan">
+            <button> Thanh toán </button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; Shiba Shop</p>
+    </footer>
+    <script>
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        async function hienThiTaiKhoan() {
+            const id = getQueryParam('id');
+            if (id) {
+                try {
+                    const response = await fetch(`http://localhost:3000/listSanPham?id=${id}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.length > 0) {
+                            const user = data[0];
+                            const taikhoanDiv = document.querySelector('.taikhoan');
+                            taikhoanDiv.innerHTML = `
+                        <div class="text">
+                            ${user.nameUser}
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="select">
+                            <a href="index.html">Đăng Xuất</a>
+                        </div>
+                    `;
+                        } else {
+                            console.error("Không tìm thấy người dùng với ID này!");
+                        }
+                    } else {
+                        console.error("Không thể lấy thông tin người dùng!");
+                    }
+                } catch (error) {
+                    console.error("Lỗi:", error);
+                }
+            }
+        }
+
+        function trangquantri() {
+            const trangquantriLink = document.getElementById("trangquantri");
+            trangquantriLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                const id = getQueryParam('id');
+                window.location.href = `TrangQuanTri.html?id=${id}`;
+            });
+        }
+
+        function trangchu() {
+            const trangquantriLink = document.getElementById("trangchu");
+            trangquantriLink.addEventListener("click", function (event) {
+                event.preventDefault();
+                const id = getQueryParam('id');
+                window.location.href = `index.html?id=${id}`;
+            });
+        }
+
+        async function hienThiGioHang() {
+            const id = getQueryParam('id');
+            if (id) {
+                try {
+                    const response = await fetch('db.json');
+                    if (response.ok) {
+                        const data = await response.json();
+                        const user = data.listSanPham.find(user => user.id === id);
+
+                        if (user) {
+                            const gioHang = user.idGioHang;
+                            const sanPhams = user.SanPhams;
+                            const gioHangContainer = document.querySelector('.sanpham-list');
+                            gioHangContainer.innerHTML = '';
+
+                            gioHang.forEach(gio => {
+                                const sp = sanPhams.find(sp => sp.idSP === gio.idSP);
+                                if (sp) {
+                                    const sanphamDiv = document.createElement('div');
+                                    sanphamDiv.classList.add('sanpham');
+                                    sanphamDiv.innerHTML = `
+                                <h2>${sp.name}</h2>
+                                <p>Thương hiệu: ${sp.thuonghieu}</p>
+                                <p>Loại sản phẩm: ${sp.loaisanpham}</p>
+                                <p>Giá: ${sp.gia} VNĐ</p>
+                                <img src="${sp.img}" alt="${sp.name}">
+                                <button onclick="deleteProduct('${sp.idSP}')">Xóa</button>
+                            `;
+                                    gioHangContainer.appendChild(sanphamDiv);
+                                }
+                            });
+                        } else {
+                            console.error("Không tìm thấy người dùng với ID này!");
+                        }
+                    } else {
+                        console.error("Không thể lấy thông tin người dùng!");
+                    }
+                } catch (error) {
+                    console.error("Lỗi:", error);
+                }
+            }
+        }
+
+        async function deleteProduct(idSP) {
+            const confirmation = confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+            if (confirmation) {
+                try {
+                    const id = getQueryParam('id');
+                    const response = await fetch('db.json');
+                    if (response.ok) {
+                        const data = await response.json();
+                        const user = data.listSanPham.find(user => user.id === id);
+
+                        if (user) {
+                            const index = user.idGioHang.findIndex(gio => gio.idSP === idSP);
+                            if (index !== -1) {
+                                user.idGioHang.splice(index, 1);
+
+                                const saveResponse = await fetch('db.json', {
+                                    method: 'PATCH', 
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(data)
+                                });
+
+                                if (saveResponse.ok) {
+                                    console.log("Xóa sản phẩm thành công");
+                                    hienThiGioHang(); 
+                                } else {
+                                    console.error("Lỗi khi lưu thông tin vào db.json");
+                                }
+                            } else {
+                                console.error("Không tìm thấy sản phẩm trong giỏ hàng");
+                            }
+                        } else {
+                            console.error("Không tìm thấy người dùng với ID này!");
+                        }
+                    } else {
+                        console.error("Không thể lấy thông tin người dùng!");
+                    }
+                } catch (error) {
+                    console.error("Lỗi:", error);
+                }
+            }
+        }
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            hienThiTaiKhoan();
+            trangchu();
+            trangquantri();
+            hienThiGioHang();
+        });
+
+    </script>
+</body>
+
+</html>

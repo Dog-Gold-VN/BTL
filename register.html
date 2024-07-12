@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f5f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+        }
+
+        button {
+            border-radius: 20px;
+            border: 1px solid #ff4b2b;
+            background-color: #ff4b2b;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        h1 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        a {
+            color: #ff4b2b;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form onsubmit="submitForm(event)" id="form">
+            <h1>Tạo tài khoản</h1>
+            <input id="nameUser" type="text" placeholder="Tên đăng nhập" required />
+            <input id="emailUser" type="email" placeholder="Email" required />
+            <input id="passwordUser" type="password" placeholder="Mật khẩu" required />
+            <button type="submit">Đăng ký</button>
+            <p>Bạn đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+
+            let nameUser = document.getElementById('nameUser').value;
+            let emailUser = document.getElementById('emailUser').value;
+            let passwordUser = document.getElementById('passwordUser').value;
+            let id = Math.floor(Math.random() * 100000000);
+            let newid = id.toString();
+            let API = 'http://localhost:3000/listSanPham';
+            console.log(API);
+            let data = {
+                SanPham: [],
+                id: newid,
+                nameUser: nameUser,
+                emailUser: emailUser,
+                passwordUser: passwordUser,
+            }
+
+            try {
+                let response = await fetch(API, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+                if (response.ok) {
+                    Swal.fire({
+                        title: 'Đăng ký thành công',
+                        html: `
+                        <p><strong>Tên đăng nhập:</strong> ${nameUser}</p>
+                        <p><strong>Email:</strong> ${emailUser}</p>
+                        <p><strong>Mật khẩu:</strong> ${passwordUser}</p>
+                        `,
+                        icon: 'info',
+                        confirmButtonText: 'OK'
+                    });
+                }
+                else {
+                    console.error("Đăng ký thất bại");
+                }
+            }
+            catch (error) {
+                console.error("Error:", error);
+                alert("Sảy ra lỗi khi kết nối tới API");
+            }
+
+            console.log("Name: " + nameUser);
+            console.log("Email: " + emailUser);
+            console.log("Password: " + passwordUser);
+        }
+    </script>
+</body>
+
+</html>
